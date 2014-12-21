@@ -1,4 +1,31 @@
 <script>
+
+$(document).ready(function() {
+	$('div.dogadjaj').click(function(){
+		var id = $(this).attr('iddog');
+		$ .ajax({
+			type: 'get',
+			url: 'getdogadjaj.php',
+			data: {q: id},
+			beforeSend: function(){},
+			success: function(data){document.getElementById("glavniSadrzaj").innerHTML = data; tabela();},
+			});
+	});
+});
+
+function dogadjaj(){
+	
+	}
+
+$(document).ready(function() {
+		$ .ajax({
+			type: 'post',
+			url: 'ajax_delete.php',
+			data: {block: id},
+			success: function(){row.css("background","#FF4A4F");location.reload();}
+			});
+});
+
 function showDogadjaj(str)
 {
 if (str==="")
@@ -53,8 +80,8 @@ xmlhttp.send();
 var dz =0;
 while(dz < 10000000){dz++;}
 }
-function asd(){
-	var a=0;
+function tabela(){
+	$('#tabela').DataTable();
 }
 
 function Otkaz(str,str2)// str volonter str2 dogadjaj
@@ -84,8 +111,9 @@ xmlhttp.open("GET","AJAXOtkaz.php?q1="+str+"&q2="+str2,true);
 xmlhttp.send();
 }
 </script>
-<div style="width: 25%; float:left">
-<h1>Pregled aktuelnih događaja</h1>
+<div class="row">
+<div class="col-md-4">
+<h2>Pregled aktuelnih događaja</h2>
 <div id="list5">
  <ul>
 <?php
@@ -96,60 +124,16 @@ $result = mysqli_query($conn,$query);
 while($row = mysqli_fetch_assoc($result)){
 	$row["id"];
 	$row["naslov"];
-	echo"<li><div onclick=\"showDogadjaj({$row['id']})\"><strong>{$row['naslov']}</li>";
+	echo"<li><div class='dogadjaj' idDog=" . $row['id'] . ">{$row['naslov']}</li>";
 	} 
 ?>
 </ul>
 </div>
 </div>
-<div id="glavniSadrzaj" style="width: 70%; float:left"></div>
-<?php
-/*echo "<pre>";
-print_r($_POST);
-echo "</pre>";*/
-if(isset($_POST['submit'])){
-$conn = mysqli_connect(HOST,USER,PASSWORD,DATABASE);
-$indikator = 0;
-foreach($niz_idjezika as $jid){
-	if(isset($_POST[$jid])){$indikator = 1;}
-	}
-if($indikator == 0){
-$query = "SELECT volonter.id, ime, prezime, email FROM volonter ";
-}else{$query = "SELECT volonter.id, ime, prezime, email, naziv FROM volonter INNER JOIN govori on govori.volonter_id = volonter.id INNER JOIN jezik ON jezik.id = govori.jezik_id ";}
-
-$uime = "ime like ";
-$uprezime = "prezime like ";
-$uemail = "email like ";
-$and = " ";
-if( isset($_POST['ime'])  || isset($_POST['prezime']) || isset($_POST['email']) ) {$query = $query . "WHERE ";}
-
-if(!empty($_POST['ime'])){$query = $query . $uime . "'%" . $_POST['ime'] . "%'"; $and = " AND "; }
-
-if(!empty($_POST['prezime'])){$query = $query . $and . $uprezime . "'%" . $_POST['prezime'] . "%'"; $and = " AND ";}
-
-if(!empty($_POST['email'])){$query = $query . $and . $uemail . "'%" . $_POST['email'] . "%'"; $and = " AND ";}
-
-foreach($niz_idjezika as $jid){
-	if(isset($_POST[$jid])){$query = $query . $and . " govori.jezik_id = " . $jid; $and = " OR ";}
-	} 
-
-echo $query;
-mysqli_query ($conn,"set character_set_results='utf8'");
-$result = mysqli_query($conn,$query);
-if($indikator == 0){
-echo "<div class=\"CSSTableGenerator\"><table><tr><td>Ime</td><td>Prezime</td><td>email</td></tr>";
-}else{
-echo "<div class=\"CSSTableGenerator\"><table><tr><td>Ime</td><td>Prezime</td><td>email</td><td>Jezik</td></tr>";	
-}
-while($row = mysqli_fetch_assoc($result)){
-	if($indikator == 0){
-		echo "<a href=\"#\"><tr><td>" . $row['ime'] . "</td><td>" . $row['prezime'] . "</td><td>" . $row['email'] . "</td></tr></a>";
-		}else{
-		echo "<a href=\"#\"><tr><td>" . $row['ime'] . "</td><td>" . $row['prezime'] . "</td><td>" . $row['email'] . "</td><td>" . $row['naziv'] . "</td></tr></a>";	
-		}
-	} 
-echo "</table></div>";
-}
-mysqli_free_result($result);
-//mysqli_close($conn);
-?>
+<div id="glavniSadrzaj" class="col-md-8 pull-left"></div>
+</div>
+<script>
+$(document).ready(function() {
+    $('#tabela').DataTable();
+} );
+</script>

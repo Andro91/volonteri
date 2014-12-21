@@ -4,7 +4,7 @@ if(!$con = new mysqli(HOST,USER,PASSWORD,DATABASE))die("GRESKA!");
 if(!$upit = $con->query("select * from volonter where id='".$_SESSION['userid']."'"))die("GRESKA!");
 if(!$zapisi = $upit->fetch_object())die("GRESKA!");
 ?>
-<div id="glavniSadrzaj">
+<div id="glavniSadrzaj" class="col-md-8">
 <!--GLAVNI SADRZAJ POCETAK-->
 
 <div class="col-sm-12" style="height:200px">

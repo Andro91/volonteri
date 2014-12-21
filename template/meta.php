@@ -1,7 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Volonteri srbije</title>
 <link href="css/stil.css" rel="stylesheet" type="text/css" />
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+
+<!--DataTables Import ONLINE-->
+<!--<link rel="stylesheet" type="text/css" media="screen" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css" />-->
+<!--DataTables Import ONLINE-->
+<!--<script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js" type="text/javascript"></script>-->
+
+<link rel="stylesheet" type="text/css" media="screen" href="css/DataTables/DataTables-1.10.4/media/css/jquery.dataTables.min.css" />
+<script src="css/DataTables/DataTables-1.10.4/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
+
+<style>
+/*body { padding-top: 32px; }*/
+</style>

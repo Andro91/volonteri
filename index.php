@@ -8,7 +8,8 @@
 <?php if(!postojiGET('str'))require_once"dodaci/slajder.php"?>
 <?php //require_once"template/glavni-sadrzaj-pocetak.php"?>
 <!--sadrzaj stranice START-->
-   
+<div class="container">
+<div class="row">
 <?php
 	if(!postojiGET('str'))require_once"content/pocetna.php";
 	else 
@@ -40,6 +41,7 @@
 		}
 	}
 ?>
+
 
 <!--sadrzaj stranice END-->
 <?php //require_once"template/glavni-sadrzaj-kraj.php"?>
