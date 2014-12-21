@@ -1,5 +1,5 @@
 <?php require_once"php/konfiguracija.php"?>
-<h1>Vesti</h1><hr/><br/>
+
 <?php 
 $p = 0;
 
@@ -25,7 +25,7 @@ $q = intval($_GET['q']);
                     $title = $row["naslov"]; 
                     $date = $row["datum"];
                     $text = $row["kratakopis"];
-                    echo '<div id="vest"><img src="#" />';
+                    echo '<div id="vest" class=\"container\"><img src="#" />';
                     echo "<h3><a href='index.php?str=dogadjaj&id={$id}'>{$title}</a></h3>";
                     $date = date_create($date);
                     echo "<p>".date_format($date, 'd-M-Y')."</p>";

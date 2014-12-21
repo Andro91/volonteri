@@ -4,7 +4,7 @@ $con = new mysqli(HOST,USER,PASSWORD,DATABASE);
 $upit = $con->query("select * from volonter where id='".$_SESSION['userid']."'");
 $zapisi = $upit->fetch_object();
 ?>
-<div id="glavniSadrzaj">
+<div id="glavniSadrzaj" class="col-md-8">
 <form action="php/registrator.php" method="post" id="regforma" name="regforma">
 <table>
   <tr>

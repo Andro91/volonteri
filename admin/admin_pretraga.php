@@ -1,8 +1,7 @@
-<form class="elegant-aero" action="index.php?str=pretraga" method="post" name="pretraga">
-<label><span>IME:</span><input type="text" name="ime"></label></br>
-<label><span>PREZIME:</span><input type="text" name="prezime"></label></br>
-<label><span>EMAIL:</span><input type="text" name="email"></label></br>
-<label><span>JEZICI:</span></label></br>
+<div class="container">
+<form class="form-inline" action="index.php?str=pretraga" method="post" name="pretraga" role="form">
+<div class="form-group">
+<label>JEZICI: </label></br>
 
 <?php
 //upit za bazu koji kupi sve jezike iz tabele jezik
@@ -22,14 +21,17 @@ while($row = mysqli_fetch_assoc($result)){
 	$niz_jezika[$i] = $row["naziv"];
 	
 	//preko POST globalne promenljive se prenosi samo id jezika koji ulazi u kriterijum
-	echo"<label><span><input type=\"checkbox\" name=\"{$niz_idjezika[$i]}\">".$niz_jezika[$i]."</span></label></br>";
+	echo"<div class=\"checkbox \"><label><input type=\"checkbox\" name=\"{$niz_idjezika[$i]}\">".$niz_jezika[$i]."</label></div>&nbsp;&nbsp;";
 	$i++;
 	} 
 	mysqli_close($conn);
 ?>
+</div>
 </br></br></br>
-<label><input type="submit" value="TRAŽI" name="submit"></label>
+<label><input type="submit" value="TRAŽI" name="submit" class="btn btn-default"></label>
 </form>
+</div>
+</br>
 <?php
 /*echo "<pre>";
 print_r($_POST);
@@ -51,13 +53,17 @@ $uime = "ime like ";
 $uprezime = "prezime like ";
 $uemail = "email like ";
 $and = " ";
-if( isset($_POST['ime'])  || isset($_POST['prezime']) || isset($_POST['email']) ) {$query = $query . "WHERE ";}
+if( !empty($_POST['ime']) || !empty($_POST['prezime']) || !empty($_POST['email']) ) {$query = $query . "WHERE ";}
 
 if(!empty($_POST['ime'])){$query = $query . $uime . "'%" . $_POST['ime'] . "%'"; $and = " AND "; }
 
 if(!empty($_POST['prezime'])){$query = $query . $and . $uprezime . "'%" . $_POST['prezime'] . "%'"; $and = " AND ";}
 
 if(!empty($_POST['email'])){$query = $query . $and . $uemail . "'%" . $_POST['email'] . "%'"; $and = " AND ";}
+
+foreach($niz_idjezika as $jid){
+	if(isset($_POST[$jid])){$query = $query . $and . " WHERE "; break;}
+	}
 
 foreach($niz_idjezika as $jid){
 	if(isset($_POST[$jid])){$query = $query . $and . " govori.jezik_id = " . $jid; $and = " OR ";}
@@ -70,10 +76,13 @@ $query = $query . " ORDER BY prezime ASC, ime ASC ";
 mysqli_query ($conn,"set character_set_results='utf8'");
 $result = mysqli_query($conn,$query);
 if($indikator == 0){
-echo "<div class=\"CSSTableGenerator\"><table><tr><td>Ime</td><td>Prezime</td><td>email</td></tr>";
-}else{
-echo "<div class=\"CSSTableGenerator\"><table><tr><td>Ime</td><td>Prezime</td><td>email</td><td>Jezik</td></tr>";	
-}
+	//class=\"CSSTableGenerator\"
+		echo "<table id='example' class='display' cellspacing='0' width='100%'>";	
+		echo "<thead ><tr><th>Ime</th><th>Prezime</th><th>email</th></tr></thead>";
+	}else{
+		echo "<table id='example' class='display' cellspacing='0' width='100%'>";	
+		echo "<thead><tr><th>Ime</th><th>Prezime</th><th>email</th><th>Jezik</th></tr></thead>";	
+	}
 while($row = mysqli_fetch_assoc($result)){
 	if($indikator == 0){
 		echo "<tr><a href=\"#\"><td>" . $row['ime'] . "</td><td>" . $row['prezime'] . "</td><td>" . $row['email'] . "</td></a></tr>";
@@ -81,7 +90,7 @@ while($row = mysqli_fetch_assoc($result)){
 		echo "<a href=\"#\"><tr><td>" . $row['ime'] . "</td><td>" . $row['prezime'] . "</td><td>" . $row['email'] . "</td><td>" . $row['naziv'] . "</td></tr></a>";	
 		}
 	} 
-echo "</table></div>";
+echo "</table>";
 }
 //mysqli_close($conn);
 ?>

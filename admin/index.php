@@ -1,32 +1,55 @@
 <?php require_once"../php/konfiguracija.php"?>
-<?php //require_once"template/glavni-sadrzaj-pocetak.php"
+<?php require_once"template/meta.php"?>
+<?php 
+//require_once"template/glavni-sadrzaj-pocetak.php"
 if (!session_id()) session_start();
 if (!$_SESSION['logon']){ 
     header('Location: '.BASE);
     die();
 }
-
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Volonteri srbije</title>
-<link href="../css/stil.css" rel="stylesheet" type="text/css" />
-<script src="ckeditor/ckeditor.js"></script>
+
+<script type="text/javascript">
+/*$(function () {
+    $("#list").jqGrid({
+        url: "testxml.php",
+        datatype: "xml",
+        mtype: "GET",
+        colNames: ["Id", "Ime", "Prezime", "Juzernejm"],
+        colModel: [
+            { name: "id", width: 55 },
+            { name: "ime", width: 90 },
+            { name: "prezime", width: 80, align: "right" },
+            { name: "username", width: 150, sortable: false }
+        ],
+        pager: "#pager",
+        rowNum: 10,
+        rowList: [10, 20, 30],
+        sortname: "invid",
+        sortorder: "desc",
+        viewrecords: true,
+        gridview: true,
+        autoencode: true,
+        caption: "My first grid"
+    }); 
+}); */
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
 </head>
 <body>
 <div id="heder">
-  <div class="centriraj">
+  <div class="container centriraj">
   	<a href="index.php"><img class="logo" src="slike/logo-volonteri-srbije.png" alt="Logo Volonteri srbije"/></a>
   	<img class="baner" src="slike/banner_sss.png" /> 
    </div>
 </div>
-<div class="centriraj"> 
+<div class="container"> 
 
 <!--sadrzaj stranice START-->
 <h1 style="text-align:center; color:#000">ADMIN strana Volonteri.rs</h1>
-
+</br>
 <?php
 	if(!isset($_GET['str'])) require_once "admin_pocetna.php";
 	else 
@@ -34,28 +57,36 @@ if (!$_SESSION['logon']){
 		switch($_GET['str']){
 			case"pretraga": 
 				require_once"admin_pretraga.php";
-			break;
+				break;
 			case"pretraga2": 
 				require_once"admin_pretraga2.php";
-			break;
+				break;
+			case"pretraga3": 
+				require_once"admin_pretraga - Copy.php";
+				break;
 			case"dogadjaji": 
 				require_once"admin_dogadjaj_pregled.php";
-			break;
+				break;
+			case"dogadjaji_tabela": 
+				require_once"admin_dogadjaj_tabela.php";
+				break;
 			case"dodogadjaj": 
 				require_once"content/novi-clanak.php";
-			break;
+				break;
 			case"jezik": 
 				require_once"jezik.php";
-			break;
+				break;
+			case"test": 
+				require_once"testxml.php";
+				break;
 			default:
 				require_once"content/greska.php";
 		}
 	}
 ?>
-
 <!--sadrzaj stranice END-->
 </div>
-<div id="futer">
+<div id="futer" class="footer">
   <div class="centriraj">
   		<!--logo slika pocetak--><!--width="140" height="126"-->
         <div class="logo">
@@ -80,5 +111,7 @@ if (!$_SESSION['logon']){
     <br clear="all" />
   </div>
 </div>
+
+
 </body>
 </html>
